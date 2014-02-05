@@ -1,13 +1,16 @@
+package com.ryanddawkins.glowing_spice;
+
 import java.net.ServerSocket;
 import java.io.IOException;
 import java.lang.NumberFormatException;
 import java.lang.IllegalArgumentException;
+import com.ryanddawkins.glowing_spice.ClientConnection;
 
 public class Server
 {
 
 	public static final int DEFAULT_PORT = 13928;
-	private static final String PORT_COMMAND = "-p";
+	public static final String PORT_COMMAND = "-p";
 
     public static void main(String[] args)
     {
@@ -45,14 +48,6 @@ public class Server
             catch(IOException e)
             {
                 System.out.println("Error with connection");
-            }
-            try
-            {
-                Thread.sleep(1000);
-            }
-            catch(InterruptedException e)
-            {
-
             }
     	}
     }
