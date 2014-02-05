@@ -1,0 +1,2 @@
+java -cp bin com.ryanddawkins.glowing_spice.Movie_Test
+java -cp bin com.ryanddawkins.glowing_spice.Server_Tests

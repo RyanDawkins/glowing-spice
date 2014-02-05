@@ -1,0 +1,5 @@
+printf "\n=============\nGlowing-Spice\n=============\n"
+printf "\nCompiling project\tWorking..."
+javac src/com/ryanddawkins/glowing-spice/*.java -d bin
+
+printf "\b\b\b\b\b\b\b\b\b\bFinished! \n\n"
