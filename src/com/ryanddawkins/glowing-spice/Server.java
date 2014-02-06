@@ -6,12 +6,25 @@ import java.lang.NumberFormatException;
 import java.lang.IllegalArgumentException;
 import com.ryanddawkins.glowing_spice.ClientConnection;
 
+/**
+ * This is the main class to be ran in the project
+ *
+ * @author Ryan Dawkins
+ * @package com.ryanddawkins.glowing_spice 
+ * @since 0.1
+ */
 public class Server
 {
 
 	public static final int DEFAULT_PORT = 13928;
 	public static final String PORT_COMMAND = "-p";
 
+    /**
+     * Main method to run the server and accepts port number
+     *
+     * @param String[] args -d <port>
+     * @return void
+     */
     public static void main(String[] args)
     {
    		ServerSocket server = null;
@@ -52,11 +65,24 @@ public class Server
     	}
     }
 
+    /**
+     * Static method to get port from args
+     *
+     * @param String[] args
+     * @return int port
+     */
     public static int getPort(String[] args)
     {
         return getPort(args, true);
     }
 
+    /**
+     * Method to get port and can turn messages_on
+     *
+     * @param String[] args
+     * @param boolean messages_on
+     * @return int port
+     */
     public static int getPort(String[] args, boolean messages_on)
     {
     	int port = -1;

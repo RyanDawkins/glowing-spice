@@ -3,6 +3,14 @@ package com.ryanddawkins.glowing_spice;
 import com.ryanddawkins.glowing_spice.Glowing_Assert;
 import com.ryanddawkins.glowing_spice.Movie;
 
+/**
+ * Test class for the movie class
+ *
+ * @author Ryan Dawkins
+ * @package com.ryanddawkins.glowing_spice
+ * @version 0.1
+ * @extends Glowing_Assert
+ */
 public class Movie_Test extends Glowing_Assert
 {
 
@@ -29,6 +37,11 @@ public class Movie_Test extends Glowing_Assert
 
 	}
 
+	/**
+	 * Tests mutators method in the Movie class
+	 *
+	 * @return boolean
+	 */
 	public static boolean testMutators()
 	{
 
@@ -42,6 +55,11 @@ public class Movie_Test extends Glowing_Assert
 		return sentinel;
 	}
 
+	/**
+	 * Tests to see if the JSON method returns the correct string
+	 *
+	 * @return boolean
+	 */
 	public static boolean testJSON()
 	{
 
@@ -54,10 +72,6 @@ public class Movie_Test extends Glowing_Assert
 			sentinel = false;
 		}
 
-		System.out.println(m.toJSON());
-
 		return sentinel;
-
 	}
-
 }
