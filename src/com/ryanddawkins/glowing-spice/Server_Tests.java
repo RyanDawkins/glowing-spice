@@ -1,3 +1,5 @@
+package com.ryanddawkins.glowing_spice;
+
 public class Server_Tests extends Glowing_Assert
 {
 
@@ -11,7 +13,7 @@ public class Server_Tests extends Glowing_Assert
 
 		if(sentinel)
 		{
-			System.out.println("All tests passed");
+			System.out.println("All Server tests passed");
 		}
 	}
 

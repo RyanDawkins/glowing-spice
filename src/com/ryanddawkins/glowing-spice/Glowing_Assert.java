@@ -1,3 +1,12 @@
+package com.ryanddawkins.glowing_spice;
+
+/**
+ * Class to deal with unit testing
+ *
+ * @author Ryan Dawkins
+ * @package com.ryanddawkins.glowing_spice
+ * @since 0.1
+ */
 public class Glowing_Assert
 {
 	
@@ -5,12 +14,12 @@ public class Glowing_Assert
 	 * Throws an error message if the case is not true
 	 * 
 	 * @param String message
-	 * @param boolean input
+	 * @param boolean result
 	 * @return boolean
 	 */
-	public static boolean assertTrue(String message, boolean input)
+	public static boolean assertTrue(String message, boolean result)
 	{
-		if(!input)
+		if(!result)
 		{
 			System.out.println(message);
 			return false;
@@ -22,16 +31,16 @@ public class Glowing_Assert
 	}
 
 	/**
-	 * Checks the equality of x and y
+	 * Checks the equality of expected and result
 	 *
 	 * @param String message
-	 * @param int x
-	 * @param int y
+	 * @param int expected
+	 * @param int result
 	 * @return boolean
 	 */
-	public static boolean assertEquals(String message, int x, int y)
+	public static boolean assertEquals(String message, int expected, int result)
 	{
-		if(x != y)
+		if(expected != result)
 		{
 			System.out.println(message);
 			return false;
@@ -43,16 +52,16 @@ public class Glowing_Assert
 	}
 
 	/**
-	 * Checks to see if x is equal to y
+	 * Checks to see if expected is equal to result
 	 *
 	 * @param String message
-	 * @param double x
-	 * @param double y
+	 * @param double expected
+	 * @param double result
 	 * @return boolean
 	 */
-	public static boolean assertEquals(String message, double x, double y)
+	public static boolean assertEquals(String message, double expected, double result)
 	{
-		if(x != y)
+		if(expected != result)
 		{
 			System.out.println(message);
 			return false;
@@ -64,15 +73,15 @@ public class Glowing_Assert
 	}
 
 	/**
-	 * Checks to see if x is equal to y are equal
+	 * Checks to see if expected is equal to result are equal
 	 *
 	 * @param String message
-	 * @param String x
-	 * @param String y
+	 * @param String expected
+	 * @param String result
 	 */
-	public static boolean assertEquals(String message, String x, String y)
+	public static boolean assertEquals(String message, String expected, String result)
 	{
-		if(!x.equals(y))
+		if(!expected.equals(result))
 		{
 			System.out.println(message);
 			return false;
