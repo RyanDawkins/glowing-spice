@@ -120,4 +120,27 @@ public class Request
 		this.command = command;
 		return this;
 	}
+
+	/**
+	 * Returns json string we save on initialization
+	 *
+	 * @return String json
+	 */
+	public String getJsonString()
+	{
+		return this.json;
+	}
+
+	/**
+	 * Chainable setter for the jsonstring
+	 *
+	 * @param String jsonString
+	 * @return Request this
+	 */
+	public Request setJsonString(String jsonString)
+	{
+		this.json = jsonString;
+		return this;
+	}
+
 }
