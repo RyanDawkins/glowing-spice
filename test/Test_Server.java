@@ -1,6 +1,18 @@
-package com.ryanddawkins.glowing_spice;
+package com.ryanddawkins.glowing_spice.test;
 
-public class Server_Tests extends Glowing_Assert
+import com.ryanddawkins.glowing_spice.Server;
+import com.ryanddawkins.glowing_spice.Glowing_Assert;
+
+/**
+ * Class to test the Server methods
+ *
+ * @author Ryan Dawkins
+ * @package com.ryanddawkins.glowing_spice.test
+ * @since 0.1
+ * @extends com.ryanddawkins.glowing_spice.Glowing_Assert
+ * @tests com.ryanddawkins.glowing_spice.Server
+ */
+public class Test_Server extends Glowing_Assert
 {
 
 	public static void main(String[] args)

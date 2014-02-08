@@ -1,4 +1,4 @@
-package com.ryanddawkins.glowing_spice;
+package com.ryanddawkins.glowing_spice.test;
 
 import com.ryanddawkins.glowing_spice.Glowing_Assert;
 import com.ryanddawkins.glowing_spice.Movie;
@@ -7,11 +7,12 @@ import com.ryanddawkins.glowing_spice.Movie;
  * Test class for the movie class
  *
  * @author Ryan Dawkins
- * @package com.ryanddawkins.glowing_spice
+ * @package com.ryanddawkins.glowing_spice.test
  * @version 0.1
- * @extends Glowing_Assert
+ * @extends com.ryanddawkins.glowing_spice.Glowing_Assert
+ * @tests com.ryanddawkins.glowing_spice.Movie
  */
-public class Movie_Test extends Glowing_Assert
+public class Test_Movie extends Glowing_Assert
 {
 
 	private static final String MOVIE_FILE_NAME = "movie.mks";
