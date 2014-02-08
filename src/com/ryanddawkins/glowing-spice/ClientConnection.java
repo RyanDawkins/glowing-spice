@@ -4,6 +4,9 @@ import java.net.Socket;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.IOException;
+import java.lang.StringBuilder;
+
+import com.ryanddawkins.glowing_spice.Request;
 
 /**
  * Class to deal with client connections and to execute their commands
@@ -37,13 +40,15 @@ public class ClientConnection implements Runnable
 	{
 		try
 		{
+			StringBuilder jsonBuilder = new StringBuilder();
 			String input = "";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			while((input = reader.readLine()) != null)
 			{
-				System.out.println(input);
+				jsonBuilder.append(input);
 			}
-
+			Request request = new Request(jsonBuilder.toString());
+			String command = request.getCommand();
 		}
 		catch(IOException e)
 		{
