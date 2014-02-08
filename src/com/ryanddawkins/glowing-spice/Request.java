@@ -52,6 +52,10 @@ public class Request
 			{
 				this.command = jobject.get("command").getAsString();
 			}
+			else
+			{
+				throw new JsonCommandNotFoundException("No Command in JSON String");
+			}
 		}
 		else if(parentElement.isJsonArray())
 		{

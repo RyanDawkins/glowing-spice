@@ -33,8 +33,9 @@ public class Test_Request extends Glowing_Assert
 		}
 	}
 	
-	private static final String JSON_TO_PARSE = "{\"fun\":[], \"Other\":\"Test\",\"command\":\"GET_MOVIES\"}";
-	private static final String EXPECTED_COMMAND = "GET_MOVIES";
+	private static final String JSON_TO_PARSE_1 = "{\"fun\":[], \"Other\":\"Test\",\"command\":\"GET_MOVIES\"}";
+	private static final String EXPECTED_COMMAND_1 = "GET_MOVIES";
+	private static final String JSON_TO_PARSE_2 = "{}";
 
 	/**
 	 * Method to check to see if we can parse a JSON string to get the command object
@@ -45,8 +46,10 @@ public class Test_Request extends Glowing_Assert
 	{
 		boolean sentinel = true;
 
-		Request r = new Request(JSON_TO_PARSE);
+		Request r;
 
+		// Should pass
+		r = new Request(JSON_TO_PARSE_1);
 		try
 		{
 			r.parse();
@@ -61,10 +64,26 @@ public class Test_Request extends Glowing_Assert
 		}
 
 		String json = r.getCommand();
-		if(!assertEquals("Incorrect Command!", EXPECTED_COMMAND, json))
+		if(!assertEquals("Incorrect Command!", EXPECTED_COMMAND_1, json))
 		{
 			sentinel = false;
 		}
+
+		// Should fail
+		r = new Request(JSON_TO_PARSE_2);
+		try
+		{
+			r.parse();
+		}
+		catch(NullJsonException nj)
+		{
+			return false;
+		}
+		catch(JsonCommandNotFoundException jc)
+		{
+			// This should happen
+		}
+
 		return sentinel;
 	}
 
