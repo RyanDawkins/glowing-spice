@@ -81,9 +81,14 @@ public class Glowing_Assert
 	 */
 	public static boolean assertEquals(String message, String expected, String result)
 	{
-		if(!expected.equals(result))
+		if(result == null)
 		{
-			System.out.println(message);
+			System.out.println("Error compared string is null!");
+			return false;
+		}
+		else if(!expected.equals(result))
+		{
+			System.out.println(message+": "+result);
 			return false;
 		}
 		else
