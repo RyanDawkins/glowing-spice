@@ -1,8 +1,8 @@
 package com.ryanddawkins.glowing_spice;
 
 import java.util.ArrayList;
-
 import java.io.File;
+import java.lang.StringBuilder;
 
 import com.ryanddawkins.glowing_spice.Response;
 import com.ryanddawkins.glowing_spice.Movie;
@@ -46,7 +46,21 @@ public class MovieList extends Response
 	 */
 	public static String toJSON(MovieList movieList)
 	{
-		return "";
+		StringBuilder json = new StringBuilder();
+		json.append("{");
+		json.append("\"movies\":");
+		json.append("[");
+		ArrayList<Movie> movies = movieList.getMovies();
+		for(int i = 0; i < movies.size(); i++)
+		{
+			json.append(movies.get(i).toJSON());
+			if(i + 1 < movies.size())
+			{
+				json.append(",");
+			}
+		}
+		json.append("]}");
+		return json.toString();
 	}
 
 	ArrayList<Movie> movies;
@@ -79,6 +93,16 @@ public class MovieList extends Response
 	public String toJSON()
 	{
 		return toJSON(this);
+	}
+
+	/**
+	 * Returns ArrayList<Movie> to iterate over the movies
+	 *
+	 * @return ArrayList<Movie> movies
+	 */
+	public ArrayList<Movie> getMovies()
+	{
+		return this.movies;
 	}
 
 }

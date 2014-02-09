@@ -4,6 +4,7 @@ import com.ryanddawkins.glowing_spice.Glowing_Assert;
 import com.ryanddawkins.glowing_spice.Request;
 import com.ryanddawkins.glowing_spice.NullJsonException;
 import com.ryanddawkins.glowing_spice.JsonCommandNotFoundException;
+import com.ryanddawkins.glowing_spice.Command;
 
 /**
  * This is the test class to handle the 
@@ -33,8 +34,7 @@ public class Test_Request extends Glowing_Assert
 		}
 	}
 	
-	private static final String JSON_TO_PARSE_1 = "{\"fun\":[], \"Other\":\"Test\",\"command\":\"GET_MOVIES\"}";
-	private static final String EXPECTED_COMMAND_1 = "GET_MOVIES";
+	private static final String JSON_TO_PARSE_1 = "{\"data\":[],\"command\":\"GET_MOVIES\"}";
 	private static final String JSON_TO_PARSE_2 = "{}";
 
 	/**
@@ -49,10 +49,9 @@ public class Test_Request extends Glowing_Assert
 		Request r;
 
 		// Should pass
-		r = new Request(JSON_TO_PARSE_1);
 		try
 		{
-			r.parse();
+			r = new Request(JSON_TO_PARSE_1);
 		}
 		catch(NullJsonException nj)
 		{
@@ -64,16 +63,15 @@ public class Test_Request extends Glowing_Assert
 		}
 
 		String json = r.getCommand();
-		if(!assertEquals("Incorrect Command!", EXPECTED_COMMAND_1, json))
+		if(!assertEquals("Incorrect Command!", Command.GET_MOVIES, json))
 		{
 			sentinel = false;
 		}
 
 		// Should fail
-		r = new Request(JSON_TO_PARSE_2);
 		try
 		{
-			r.parse();
+			r = new Request(JSON_TO_PARSE_2);
 		}
 		catch(NullJsonException nj)
 		{
