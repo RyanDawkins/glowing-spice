@@ -2,7 +2,9 @@ package com.ryanddawkins.glowing_spice;
 
 import java.net.Socket;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
 import java.io.IOException;
 import java.lang.StringBuilder;
 
@@ -40,35 +42,65 @@ public class ClientConnection implements Runnable
 	 */
 	public void run()
 	{
+
+		String jsonString = readJson();
+
+		Request request;
 		try
 		{
-			StringBuilder jsonBuilder = new StringBuilder();
+			request = new Request(jsonString);
+		}
+		catch(NullJsonException e)
+		{
+			return;
+		}
+		catch(JsonCommandNotFoundException e)
+		{
+			return;
+		}
+		String commandString = request.getCommand();
+		String response = getResponse(commandString, request);
+
+		BufferedWriter bf;
+		try
+		{
+			bf = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
+			bf.write(response);
+			bf.flush();
+			bf.close();
+		}
+		catch(IOException e)
+		{
+			System.out.println("Null socket sent");
+		}
+	}
+
+	public String readJson()
+	{
+		StringBuilder jsonBuilder;
+		String jsonString = "{}";
+		try
+		{
+			jsonBuilder = new StringBuilder();
 			String input = "";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			while((input = reader.readLine()) != null)
 			{
 				jsonBuilder.append(input);
 			}
-			Request request;
-			try
-			{
-				request = new Request(jsonBuilder.toString());
-			}
-			catch(NullJsonException e)
-			{
-				return;
-			}
-			catch(JsonCommandNotFoundException e)
-			{
-				return;
-			}
-			String commandString = request.getCommand();
-			Command command = new Command(commandString, request.getJsonElement());
+			jsonString = jsonBuilder.toString();
 		}
 		catch(IOException e)
 		{
 			e.printStackTrace();
 		}
+		return jsonString;
+	}
+
+	public String getResponse(String commandString, Request request)
+	{
+		Command command = new Command(commandString, request.getJsonElement());
+		return command.getJsonReturn();
 	}
 
 }
