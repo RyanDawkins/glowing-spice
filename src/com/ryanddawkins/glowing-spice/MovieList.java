@@ -18,6 +18,8 @@ import com.ryanddawkins.glowing_spice.Movie;
 public class MovieList extends Response
 {
 
+	public static final String[] acceptedExtensions = {".mp4", ".mkv", ".avi", ".wmv", ".mov", ".ogm"};
+
 	/**
 	 * Static method to grab a directories files and add them into a list
 	 *
@@ -32,10 +34,31 @@ public class MovieList extends Response
 		File[] files = root_directory.listFiles();
 		for(int i = 0; i < files.length; i++)
 		{
-			Movie m = new Movie(files[i].getName());
-			movieList.addMovie(m);
+			if(isAcceptedExtension(files[i].getName()))
+			{
+				Movie m = new Movie(files[i].getName());
+				movieList.addMovie(m);
+			}
 		}
 		return movieList;
+	}
+
+	/**
+	 * Checks to see if the file is an accepted extension
+	 *
+	 * @param String fileName
+	 * @return boolean
+	 */
+	public static boolean isAcceptedExtension(String fileName)
+	{
+		for(int i = 0; i < acceptedExtensions.length; i++)
+		{
+			if(fileName.endsWith(acceptedExtensions[i]))
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**

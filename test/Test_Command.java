@@ -43,6 +43,7 @@ public class Test_Command extends Glowing_Assert
 
 	public static boolean testGetMovies()
 	{
+		boolean sentinel = true;
 		String movieJson = "{\"command\": \""+Command.GET_MOVIES+"\", \"directory\": \"/home/ryan/Pictures\"}";
 		Request request;
 		
@@ -62,7 +63,12 @@ public class Test_Command extends Glowing_Assert
 		Command command = new Command(request.getCommand(), request.getJsonElement());
 		command.run();
 
-		return false;
+		if( !assertEquals("Incorrect json!: "+command.getJsonReturn(), "{\"movies\":[]}", command.getJsonReturn()))
+		{
+			sentinel = false;
+		}
+
+		return sentinel;
 	}
 
 }

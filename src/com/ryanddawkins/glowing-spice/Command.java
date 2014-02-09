@@ -21,6 +21,7 @@ public class Command
 
 	private String command;
 	private JsonElement data;
+	private String jsonReturn;
 
 	/**
 	 * Takes command string and sets data to null
@@ -88,27 +89,52 @@ public class Command
 		return this.data;
 	}
 
+	/**
+	 * Method to decide what action to perform
+	 *
+	 * @return void
+	 */
 	public void run()
 	{
 		if(this.command.equals(GET_MOVIES))
 		{
-			String directory;
-			if(this.data != null && this.data.isJsonObject() && this.data.getAsJsonObject().has("directory"))
-			{
-				directory = this.data.getAsJsonObject().get("directory").getAsString();
-			}
-			else
-			{
-				directory = null;
-			}
-
-			MovieList movies;
-			if(directory != null)
-			{
-				movies = MovieList.create(directory);
-				System.out.println(movies.toJSON());
-			}
+			getMovies();
 		}
+	}
+
+	/**
+	 * This method makes it easier to break up the run method and control the logic
+	 *
+	 * @return void
+	 */
+	private void getMovies()
+	{
+		String directory;
+		if(this.data != null && this.data.isJsonObject() && this.data.getAsJsonObject().has("directory"))
+		{
+			directory = this.data.getAsJsonObject().get("directory").getAsString();
+		}
+		else
+		{
+			directory = null;
+		}
+
+		MovieList movies;
+		if(directory != null)
+		{
+			movies = MovieList.create(directory);
+			this.jsonReturn = movies.toJSON();
+		}
+	}
+
+	/**
+	 * Get returned json data after running the run command
+	 *
+	 * @return String json
+	 */
+	public String getJsonReturn()
+	{
+		return this.jsonReturn;
 	}
 
 }
