@@ -6,6 +6,8 @@ import java.io.InputStreamReader;
 import java.io.IOException;
 import java.lang.StringBuilder;
 
+import com.ryanddawkins.glowing_spice.NullJsonException;
+import com.ryanddawkins.glowing_spice.JsonCommandNotFoundException;
 import com.ryanddawkins.glowing_spice.Request;
 
 /**
@@ -47,8 +49,21 @@ public class ClientConnection implements Runnable
 			{
 				jsonBuilder.append(input);
 			}
-			Request request = new Request(jsonBuilder.toString());
-			String command = request.getCommand();
+			Request request;
+			try
+			{
+				request = new Request(jsonBuilder.toString());
+			}
+			catch(NullJsonException e)
+			{
+				return;
+			}
+			catch(JsonCommandNotFoundException e)
+			{
+				return;
+			}
+			String commandString = request.getCommand();
+			Command command = new Command(commandString, request.getJsonElement());
 		}
 		catch(IOException e)
 		{

@@ -22,17 +22,19 @@ public class Request
 	private String command;
 	private Response response;
 	private String json;
+	private JsonElement data;
 
 	/**
 	 * Takes JSON String and decides what to do in the parse
 	 *
 	 * @param String json
 	 */
-	public Request(String json)
+	public Request(String json) throws NullJsonException, JsonCommandNotFoundException
 	{
 		this.json = json;
 		this.command = null;
 		this.response = null;
+		this.parse();
 	}
 
 	/**
@@ -45,6 +47,7 @@ public class Request
 	public Request parse() throws NullJsonException, JsonCommandNotFoundException
 	{
 		JsonElement parentElement = new JsonParser().parse(this.json);
+		this.data = parentElement;
 		if(parentElement.isJsonObject())
 		{
 			JsonObject jobject = parentElement.getAsJsonObject();
@@ -143,4 +146,25 @@ public class Request
 		return this;
 	}
 
+	/**
+	 * Chainable method to set the JsonElement
+	 *
+	 * @param JsonElement data
+	 * @return Request this
+	 */
+	public Request setJsonElement(JsonElement data)
+	{
+		this.data = data;
+		return this;
+	}
+
+	/**
+	 * Getter for JsonElement data
+	 *
+	 * @return JsonElement data
+	 */
+	public JsonElement getJsonElement()
+	{
+		return this.data;
+	}
 }
