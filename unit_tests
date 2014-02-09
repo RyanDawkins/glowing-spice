@@ -1,3 +1,4 @@
 java -cp bin com.ryanddawkins.glowing_spice.test.Test_Movie
 java -cp bin com.ryanddawkins.glowing_spice.test.Test_Server
 java -cp "bin:lib/gson-2.2.4.jar" com.ryanddawkins.glowing_spice.test.Test_Request;
+java -cp "bin:lib/gson-2.2.4.jar" com.ryanddawkins.glowing_spice.test.Test_Command;
