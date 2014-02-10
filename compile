@@ -1,5 +1,5 @@
 printf "\n=============\nGlowing-Spice\n=============\n"
 printf "\nCompiling project\tWorking..."
-javac src/com/ryanddawkins/glowing-spice/*.java -d bin -classpath lib/gson-2.2.4.jar
+javac src/com/ryanddawkins/glowing-spice/*.java -d bin -classpath "lib/gson-2.2.4.jar:lib/vlcj-3.0.1.jar:lib/jna-3.5.2.jar"
 javac test/*.java -d bin -classpath "bin:lib/gson-2.2.4.jar"
 printf "\b\b\b\b\b\b\b\b\b\bFinished! \n\n"
