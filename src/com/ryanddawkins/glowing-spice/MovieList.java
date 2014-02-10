@@ -32,14 +32,17 @@ public class MovieList extends Response
 
 		File root_directory = new File(directory_path);
 		File[] files = root_directory.listFiles();
-		for(int i = 0; i < files.length; i++)
+		if(files != null)
 		{
+		    for(int i = 0; i < files.length; i++)
+		    {
 			if(isAcceptedExtension(files[i].getName()))
 			{
 				Movie m = new Movie(files[i].getName());
 				movieList.addMovie(m);
 			}
-		}
+		    }
+                }
 		return movieList;
 	}
 
