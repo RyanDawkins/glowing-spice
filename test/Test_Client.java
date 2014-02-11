@@ -30,19 +30,6 @@ public class Test_Client
 		BufferedReader reader;
 		StringBuilder jsonBuilder = new StringBuilder();
 
-		// try
-		// {
-		// 	localhost = InetAddress.getLocalHost();
-		// 	socket = new Socket(localhost, 13928);
-		// 	ostream = new PrintWriter(socket.getOutputStream());
-		// 	reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-		// }
-		// catch(IOException e)
-		// {
-		// 	e.printStackTrace();
-		// 	return;
-		// }
-
 		String input = "";
 		boolean sentinel = true;
 		while(sentinel)

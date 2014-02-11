@@ -21,10 +21,30 @@ public class Movie
 	 */
 	public Movie(String fileName)
 	{
-		this.fileName = fileName;
-
 		// Removes file extension
-		this.name = this.fileName.substring(0, this.fileName.lastIndexOf('.'));
+		this.name = fileName.substring(0, fileName.lastIndexOf('.'));
+	}
+
+	/**
+	 * Chainable method to set file path
+	 *
+	 * @param String filePath
+	 * @return Movie this
+	 */
+	public Movie setFilePath(String filePath)
+	{
+		this.fileName = filePath;
+		return this;
+	}
+
+	/**
+	 * Getter for filepath
+	 *
+	 * @return String filePath
+	 */
+	public String getFilePath()
+	{
+		return this.fileName;
 	}
 
 	/**

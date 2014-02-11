@@ -39,6 +39,7 @@ public class MovieList extends Response
 			if(isAcceptedExtension(files[i].getName()))
 			{
 				Movie m = new Movie(files[i].getName());
+				m.setFilePath(files[i].getAbsolutePath());
 				movieList.addMovie(m);
 			}
 		    }

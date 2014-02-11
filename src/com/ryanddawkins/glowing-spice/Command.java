@@ -186,7 +186,11 @@ public class Command
 		{
 			this.player = new VideoPlayer();
 		}
-		this.player.playFile(fileName);
+
+		if(fileName != null)
+		{
+			this.player.playFile(fileName);
+		}
 	}
 
 	/**
