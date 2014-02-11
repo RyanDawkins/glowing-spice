@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.lang.NumberFormatException;
 import java.lang.IllegalArgumentException;
 import com.ryanddawkins.glowing_spice.ClientConnection;
+import com.ryanddawkins.glowing_spice.VideoPlayer;
 
 /**
  * This is the main class to be ran in the project
@@ -27,6 +28,7 @@ public class Server
      */
     public static void main(String[] args)
     {
+        VideoPlayer player = new VideoPlayer();
    		ServerSocket server = null;
     	int port = getPort(args);
 
@@ -55,7 +57,7 @@ public class Server
     	{
     		try
     		{
-    			Thread connection = new Thread(new ClientConnection(server.accept()));
+    			Thread connection = new Thread(new ClientConnection(server.accept(), player));
                 connection.start();
     		}
             catch(IOException e)

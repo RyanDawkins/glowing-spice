@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonElement;
 
 import com.ryanddawkins.glowing_spice.MovieList;
+import com.ryanddawkins.glowing_spice.VideoPlayer;
 
 /**
  * Class to run the commands parsed from the request class
@@ -17,11 +18,13 @@ public class Command
 {
 	
 	public static final String GET_MOVIES = "GET_MOVIES";
-	public static final String GET_MOVIE = "GET_MOVIES";
+	public static final String PLAY_MOVIE = "PLAY_MOVIE";
+	public static final String PAUSE_MEDIA = "PAUSE_MEDIA":
 
 	private String command;
 	private JsonElement data;
 	private String jsonReturn;
+	private VideoPlayer player;
 
 	/**
 	 * Takes command string and sets data to null
@@ -43,6 +46,28 @@ public class Command
 	{
 		this.command = command;
 		this.data = data;
+	}
+
+	/**
+	 * Chainable method to set the video player object
+	 *
+	 * @param String player
+	 * @return Command this
+	 */
+	public Command setPlayer(VideoPlayer player)
+	{
+		this.player = player;
+		return this;
+	}
+
+	/**
+	 * Getter for the video player
+	 *
+	 * @return VideoPlayer player
+	 */
+	public VideoPlayer getPlayer()
+	{
+		return this.player;
 	}
 
 	/**
@@ -100,6 +125,15 @@ public class Command
 		{
 			getMovies();
 		}
+		else if(this.command.equals(PLAY_MOVIE))
+		{
+			this.player.setVisible(true);
+			playMovie();
+		}
+		else if(this.command.equals(PAUSE_MEDIA))
+		{
+			pauseMovie();
+		}
 	}
 
 	/**
@@ -123,8 +157,37 @@ public class Command
 		if(directory != null)
 		{
 			movies = MovieList.create(directory);
-			this.jsonReturn = movies.toJSON();
+			this.jsonReturn = movies.toJSON();	
 		}
+	}
+
+	/**
+	 * Method to play a movie to break up the run method
+	 *
+	 * @return void
+	 */
+	private void playMovie()
+	{
+		String fileName;
+		if(this.data != null && this.data.isJsonObject() && this.data.getAsJsonObject().has("fileName"))
+		{
+			fileName = this.data.getAsJsonObject().get("fileName").getAsString();
+		}
+		else
+		{
+			fileName = null;
+		}
+
+		if(this.player == null)
+		{
+			this.player = new VideoPlayer();
+		}
+		this.player.playFile(fileName);
+	}
+
+	public void pauseMovie()
+	{
+		this.player.pause();
 	}
 
 	/**

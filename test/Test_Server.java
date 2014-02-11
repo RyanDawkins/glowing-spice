@@ -3,6 +3,12 @@ package com.ryanddawkins.glowing_spice.test;
 import com.ryanddawkins.glowing_spice.Server;
 import com.ryanddawkins.glowing_spice.Glowing_Assert;
 
+import java.net.Socket;
+import java.net.InetAddress;
+import java.io.PrintWriter;
+import java.io.OutputStreamWriter;
+import java.io.IOException;
+
 /**
  * Class to test the Server methods
  *
@@ -23,10 +29,13 @@ public class Test_Server extends Glowing_Assert
 			sentinel = false;
 		}
 
+		playMovie();
+
 		if(sentinel)
 		{
 			System.out.println("All Server tests passed");
 		}
+
 	}
 
 	public static boolean getPort()
@@ -69,6 +78,20 @@ public class Test_Server extends Glowing_Assert
 
 		return sentinel;
 
+	}
+
+	public static void playMovie()
+	{
+		PrintWriter writer;
+		try{
+			InetAddress localhost = InetAddress.getLocalHost();
+			Socket socket = new Socket(localhost, 13928);
+			writer = new PrintWriter(socket.getOutputStream());
+			writer.println("{\"command\":\"PLAY_MOVIE\", \"fileName\":\"/media/ryan/Passport/Videos/Movies/Thriller/wwz.avi\"}");
+			writer.flush();
+		} catch(IOException e){
+			System.out.println("IO EXCEPTION");
+		}
 	}
 
 }

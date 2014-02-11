@@ -11,6 +11,7 @@ import java.lang.StringBuilder;
 import com.ryanddawkins.glowing_spice.NullJsonException;
 import com.ryanddawkins.glowing_spice.JsonCommandNotFoundException;
 import com.ryanddawkins.glowing_spice.Request;
+import com.ryanddawkins.glowing_spice.VideoPlayer;
 
 /**
  * Class to deal with client connections and to execute their commands
@@ -24,15 +25,17 @@ public class ClientConnection implements Runnable
 {
 	
 	private Socket socket;
+	private VideoPlayer player;
 
 	/**
 	 * Constructor to take and store the socket
 	 *
 	 * @param Socket socket
 	 */
-	public ClientConnection(Socket socket)
+	public ClientConnection(Socket socket, VideoPlayer player)
 	{
 		this.socket = socket;
+		this.player = player;
 	}
 
 	/**
@@ -59,22 +62,34 @@ public class ClientConnection implements Runnable
 			return;
 		}
 		String commandString = request.getCommand();
-		String response = getResponse(commandString, request);
+		Command command = new Command(commandString, request.getJsonElement());
+		command.setPlayer(this.player);
+		command.run();
+		String response = command.getJsonReturn();
 
-		BufferedWriter bf;
-		try
+		if(response != null)
 		{
-			bf = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
-			bf.write(response);
-			bf.flush();
-			bf.close();
+			BufferedWriter bf;
+			try
+			{
+				bf = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
+				bf.write(response);
+				bf.flush();
+				bf.close();
+			}
+			catch(IOException e)
+			{
+				System.out.println("Null socket sent");
+			}
 		}
-		catch(IOException e)
-		{
-			System.out.println("Null socket sent");
-		}
+		System.out.println("Ending..");
 	}
 
+	/**
+	 * Method to grab the json string from the inputstream given from socket
+	 *
+	 * @return String json
+	 */
 	public String readJson()
 	{
 		StringBuilder jsonBuilder;
@@ -95,12 +110,6 @@ public class ClientConnection implements Runnable
 			e.printStackTrace();
 		}
 		return jsonString;
-	}
-
-	public String getResponse(String commandString, Request request)
-	{
-		Command command = new Command(commandString, request.getJsonElement());
-		return command.getJsonReturn();
 	}
 
 }
