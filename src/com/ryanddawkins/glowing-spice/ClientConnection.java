@@ -2,7 +2,7 @@ package com.ryanddawkins.glowing_spice;
 
 import java.net.Socket;
 import java.io.BufferedReader;
-import java.io.BufferedWriter;
+import java.io.PrintWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.IOException;
@@ -36,6 +36,7 @@ public class ClientConnection implements Runnable
 	{
 		this.socket = socket;
 		this.player = player;
+		System.out.println("Started client connections");
 	}
 
 	/**
@@ -47,7 +48,6 @@ public class ClientConnection implements Runnable
 	{
 
 		String jsonString = readJson();
-
 		Request request;
 		try
 		{
@@ -55,10 +55,12 @@ public class ClientConnection implements Runnable
 		}
 		catch(NullJsonException e)
 		{
+			e.printStackTrace();
 			return;
 		}
 		catch(JsonCommandNotFoundException e)
 		{
+			e.printStackTrace();
 			return;
 		}
 		String commandString = request.getCommand();
@@ -66,23 +68,39 @@ public class ClientConnection implements Runnable
 		command.setPlayer(this.player);
 		command.run();
 		String response = command.getJsonReturn();
-
 		if(response != null)
 		{
-			BufferedWriter bf;
+			PrintWriter writer;
 			try
 			{
-				bf = new BufferedWriter(new OutputStreamWriter(this.socket.getOutputStream()));
-				bf.write(response);
-				bf.flush();
-				bf.close();
+				writer = new PrintWriter(this.socket.getOutputStream());
+				writer.println(response);
+				writer.println("--DONE--");
+				writer.flush();
 			}
 			catch(IOException e)
 			{
 				System.out.println("Null socket sent");
+				e.printStackTrace();
 			}
 		}
-		System.out.println("Ending..");
+		else
+		{
+			PrintWriter writer;
+			try
+			{
+				writer = new PrintWriter(this.socket.getOutputStream());
+				writer.println("--DONE--");
+				writer.flush();
+			}
+			catch(IOException e)
+			{
+				System.out.println("Null socket sent");
+				e.printStackTrace();
+			}	
+			System.out.println("Null response");
+		}
+		System.out.println("Ending client connection");
 	}
 
 	/**
@@ -98,10 +116,14 @@ public class ClientConnection implements Runnable
 		{
 			jsonBuilder = new StringBuilder();
 			String input = "";
-			BufferedReader reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			while((input = reader.readLine()) != null)
 			{
-				jsonBuilder.append(input);
+			 	if(!input.equals("--DONE--")){
+					jsonBuilder.append(input);
+				} else{
+					break;
+				}
 			}
 			jsonString = jsonBuilder.toString();
 		}

@@ -19,7 +19,7 @@ public class Command
 	
 	public static final String GET_MOVIES = "GET_MOVIES";
 	public static final String PLAY_MOVIE = "PLAY_MOVIE";
-	public static final String PAUSE_MEDIA = "PAUSE_MEDIA":
+	public static final String PAUSE_MEDIA = "PAUSE_MEDIA";
 
 	private String command;
 	private JsonElement data;
@@ -134,6 +134,10 @@ public class Command
 		{
 			pauseMovie();
 		}
+		else
+		{
+			System.out.println("Invalid command");
+		}
 	}
 
 	/**
@@ -169,9 +173,9 @@ public class Command
 	private void playMovie()
 	{
 		String fileName;
-		if(this.data != null && this.data.isJsonObject() && this.data.getAsJsonObject().has("fileName"))
+		if(this.data != null && this.data.isJsonObject() && this.data.getAsJsonObject().has("filePath"))
 		{
-			fileName = this.data.getAsJsonObject().get("fileName").getAsString();
+			fileName = this.data.getAsJsonObject().get("filePath").getAsString();
 		}
 		else
 		{
@@ -193,6 +197,7 @@ public class Command
 	public void pauseMovie()
 	{
 		this.player.pause();
+		System.out.println("Happened");
 	}
 
 	/**

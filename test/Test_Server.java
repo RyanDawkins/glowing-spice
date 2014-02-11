@@ -97,7 +97,7 @@ public class Test_Server extends Glowing_Assert
 			InetAddress localhost = InetAddress.getLocalHost();
 			Socket socket = new Socket(localhost, 13928);
 			writer = new PrintWriter(socket.getOutputStream());
-			writer.println("{\"command\":\"PLAY_MOVIE\", \"fileName\":\"/media/ryan/Passport/Videos/Movies/Thriller/wwz.avi\"}");
+			writer.println("{\"command\":\"PLAY_MOVIE\", \"fileName\":\"/media/ryan/Passport/Videos/Movies/Thriller/National Treasure.mkv\"}");
 			writer.flush();
 		} catch(IOException e){
 			System.out.println("IO EXCEPTION");
