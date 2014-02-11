@@ -185,6 +185,11 @@ public class Command
 		this.player.playFile(fileName);
 	}
 
+	/**
+	 * Pauses the movie by calling the player pause function
+	 *
+	 * @return void
+	 */
 	public void pauseMovie()
 	{
 		this.player.pause();

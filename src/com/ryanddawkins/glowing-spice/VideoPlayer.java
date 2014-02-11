@@ -61,6 +61,11 @@ public class VideoPlayer extends JFrame
     	return this;	
     }
 
+    /**
+     * Method to pause the movie by using the mediaPlayer object
+     *
+     * @return VideoPlayer this
+     */
     public VideoPlayer pause()
     {
         this.mediaPlayerComponent.getMediaPlayer().pause();
