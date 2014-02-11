@@ -38,6 +38,11 @@ public class Test_Server extends Glowing_Assert
 
 	}
 
+	/**
+	 * Test method to ensure the correct port number is grabbed by the args
+	 *
+	 * @return boolean
+	 */
 	public static boolean getPort()
 	{
 		int portReturned = -1;
@@ -80,6 +85,11 @@ public class Test_Server extends Glowing_Assert
 
 	}
 
+	/**
+	 * Play movie method to test how playing a movie works.
+	 *
+	 * @return void
+	 */
 	public static void playMovie()
 	{
 		PrintWriter writer;
