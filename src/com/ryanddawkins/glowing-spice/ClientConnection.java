@@ -75,7 +75,7 @@ public class ClientConnection implements Runnable
 			{
 				writer = new PrintWriter(this.socket.getOutputStream());
 				writer.println(response);
-				writer.println("--DONE--");
+				writer.println(Request.TERMINATOR);
 				writer.flush();
 			}
 			catch(IOException e)
@@ -119,7 +119,7 @@ public class ClientConnection implements Runnable
 			BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
 			while((input = reader.readLine()) != null)
 			{
-			 	if(!input.equals("--DONE--")){
+			 	if(!input.equals(Request.TERMINATOR)){
 					jsonBuilder.append(input);
 				} else{
 					break;

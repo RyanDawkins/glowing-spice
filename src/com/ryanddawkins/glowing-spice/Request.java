@@ -24,6 +24,8 @@ public class Request
 	private String json;
 	private JsonElement data;
 
+	public static String TERMINATOR = "--DONE--";
+
 	/**
 	 * Takes JSON String and decides what to do in the parse
 	 *
