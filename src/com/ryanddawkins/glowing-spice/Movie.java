@@ -13,6 +13,7 @@ public class Movie
 
 	private String name;
 	private String fileName;
+	private boolean isDirectory;
 
 	/**
 	 * Constructor to create a movie instance and store it's "movie name"
@@ -22,8 +23,36 @@ public class Movie
 	public Movie(String fileName)
 	{
 		// Removes file extension
-		this.name = fileName.substring(0, fileName.lastIndexOf('.'));
+		if(fileName.lastIndexOf('.') > -1)
+		{
+			this.name = fileName.substring(0, fileName.lastIndexOf('.'));
+		}
+		else
+		{
+			this.name = fileName;
+		}
 	}
+
+	/**
+     * Movie to set if is a directory
+     * @param isDirectory
+     * @return false
+     */
+    public Movie setIsDirectory(boolean isDirectory)
+    {
+        this.isDirectory = isDirectory;
+        return this;
+    }
+
+	/**
+     * Method to check if directory to make another request to grab more movie files
+     *
+     * @return boolean
+     */
+    public boolean isDirectory()
+    {
+        return this.isDirectory;
+    }
 
 	/**
 	 * Chainable method to set file path
@@ -114,7 +143,8 @@ public class Movie
 		json.append("{");
 			json.append("\"movie\":{");
 				json.append("\"name\":\"").append(m.name).append("\",");
-				json.append("\"fileName\":\"").append(m.fileName).append("\"");
+				json.append("\"fileName\":\"").append(m.fileName).append("\",");
+				json.append("\"isDirectory\":\"").append(m.isDirectory()).append("\"");
 			json.append("}");
 		json.append("}");
 		return json.toString();
