@@ -36,14 +36,15 @@ public class MovieList extends Response
 		{
 		    for(int i = 0; i < files.length; i++)
 		    {
-			if(isAcceptedExtension(files[i].getName()))
-			{
-				Movie m = new Movie(files[i].getName());
-				m.setFilePath(files[i].getAbsolutePath());
-				movieList.addMovie(m);
-			}
+				if(isAcceptedExtension(files[i].getName()) || files[i].isDirectory())
+				{
+					Movie m = new Movie(files[i].getName());
+					m.setFilePath(files[i].getAbsolutePath());
+					m.setIsDirectory(files[i].isDirectory());
+					movieList.addMovie(m);
+				}
 		    }
-                }
+        }
 		return movieList;
 	}
 

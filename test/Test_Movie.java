@@ -67,7 +67,7 @@ public class Test_Movie extends Glowing_Assert
 		boolean sentinel = true;
 
 		Movie m = new Movie(MOVIE_FILE_NAME);
-
+		m.setFileName(MOVIE_FILE_NAME);
 		if(!assertEquals("Wrong JSON!", EXEPECTED_JSON, m.toJSON()))
 		{
 			sentinel = false;
