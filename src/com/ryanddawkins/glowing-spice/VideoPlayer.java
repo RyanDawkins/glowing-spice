@@ -38,6 +38,8 @@ public class VideoPlayer extends JFrame
 		this.mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
 		this.setContentPane(this.mediaPlayerComponent);
 
+        this.mediaPlayerComponent.getMediaPlayer().setSpu(-1);
+
         // This is so we can implement our own windowAdapter
         this.setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
         this.addWindowListener(new WindowAdapter(){
@@ -71,6 +73,63 @@ public class VideoPlayer extends JFrame
     public VideoPlayer pause()
     {
         this.mediaPlayerComponent.getMediaPlayer().pause();
+        return this;
+    }
+
+
+    /**
+     * Tells the mediaplayer to play the previous chapter
+     *
+     * @return VideoPlayer this
+     */
+    public VideoPlayer previousChapter()
+    {
+        this.mediaPlayerComponent.getMediaPlayer().previousChapter();
+        return this;
+    }
+
+    /**
+     * Tells the mediaplayer to play the next chapter
+     *
+     * @return VideoPlayer this
+     */
+    public VideoPlayer nextChapter()
+    {
+        this.mediaPlayerComponent.getMediaPlayer().nextChapter();
+        return this;
+    }
+
+    /**
+     * Fast forwards 10 seconds per second
+     *
+     * @return VideoPlayer this
+     */
+    public VideoPlayer fastForward()
+    {
+        this.skip(10*10000);
+        return this;
+    }
+
+    /**
+     * Fast backwards 10 seconds per second
+     *
+     * @return VideoPlayer this
+     */
+    public VideoPlayer fastBackward()
+    {
+        this.skip(10.10000);
+        return this;
+    }
+
+
+    /**
+     * Takes seconds integer and skips that many seconds per second
+     *
+     * @return VideoPlayer this
+     */
+    private VideoPlayer skip(int miliseconds)
+    {
+        this.mediaPlayerComponent.getMediaPlayer().skip(miliseconds);
         return this;
     }
 

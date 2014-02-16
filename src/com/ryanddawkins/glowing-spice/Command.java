@@ -20,6 +20,10 @@ public class Command
 	public static final String GET_MOVIES = "GET_MOVIES";
 	public static final String PLAY_MOVIE = "PLAY_MOVIE";
 	public static final String PAUSE_MEDIA = "PAUSE_MEDIA";
+	public static final String NEXT_CHAPTER = "NEXT_CHAPTER";
+	public static final String PREVIOUS_CHAPTER = "PREVIOUS_CHAPTER";
+	public static final String SKIP_FORWARD = "SKIP_FORWARD";
+	public static final String SKIP_BACKWARD = "SKIP_BACKWARD";
 
 	private String command;
 	private JsonElement data;
@@ -134,6 +138,22 @@ public class Command
 		{
 			pauseMovie();
 		}
+		else if(this.command.eqauls(NEXT_CHAPTER))
+		{
+			nextChapter();
+		}
+		else if(this.command.eqauls(PREVIOUS_CHAPTER))
+		{
+			previousChapter();
+		}
+		else if(this.command.eqauls(SKIP_BACKWARD))
+		{
+			fastBackward();
+		}
+		else if(this.command.eqauls(SKIP_FORWARD))
+		{
+			fastFoward();
+		}
 		else
 		{
 			System.out.println("Invalid command");
@@ -201,7 +221,47 @@ public class Command
 	public void pauseMovie()
 	{
 		this.player.pause();
-		System.out.println("Happened");
+	}
+
+	/**
+	 * Plays the next chapter
+	 *
+	 * @return void
+	 */
+	public void nextChapter()
+	{
+		this.player.nextChapter();
+	}
+
+	/**
+	 * Plays the previous chapter
+	 *
+	 * @return void
+	 */
+	public void previousChapter()
+	{
+		this.player.previousChapter();
+	}
+
+
+	/**
+	 * Fast forward function
+	 *
+	 * @return void
+	 */
+	public void fastFoward()
+	{
+		this.player.fastFoward();
+	}
+
+	/**
+	 * Fast backward function
+	 *
+	 * @return void
+	 */
+	public void fastBackward()
+	{
+		this.player.fastBackward();
 	}
 
 	/**
