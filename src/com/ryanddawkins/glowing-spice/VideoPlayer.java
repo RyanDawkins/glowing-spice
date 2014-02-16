@@ -108,7 +108,7 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer fastForward()
     {
-        float rate = 1.5f;
+        int rate = 3 * 1000;
         this.skip(rate);
         return this;
     }
@@ -120,7 +120,7 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer fastBackward()
     {
-        float rate = -1.5f;
+        int rate = -3 * 1000;
         this.skip(rate);
         return this;
     }
@@ -135,9 +135,9 @@ public class VideoPlayer extends JFrame
      *
      * @return VideoPlayer this
      */
-    private VideoPlayer skip(float rate)
+    private VideoPlayer skip(int rate)
     {
-        this.mediaPlayerComponent.getMediaPlayer().setRate(rate);
+        this.mediaPlayerComponent.getMediaPlayer().skip(rate);
         return this;
     }
 
