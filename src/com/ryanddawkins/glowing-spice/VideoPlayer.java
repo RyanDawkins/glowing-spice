@@ -27,12 +27,12 @@ public class VideoPlayer extends JFrame
     public VideoPlayer()
     {
         // Sets fullscreen
-		// Toolkit tk = Toolkit.getDefaultToolkit();
-		// int xsize = ((int) tk.getScreenSize().getWidth());
-		// int ysize = ((int) tk.getScreenSize().getHeight());
-		// this.setSize(xsize, ysize);
+		Toolkit tk = Toolkit.getDefaultToolkit();
+		int xsize = ((int) tk.getScreenSize().getWidth());
+		int ysize = ((int) tk.getScreenSize().getHeight());
+		this.setSize(xsize, ysize);
         this.setExtendedState(MAXIMIZED_BOTH);
-        setUndecorated(true);
+        setUndecorated(false);
 		
         // Grabs mediaComponent to call functions on
 		this.mediaPlayerComponent = new EmbeddedMediaPlayerComponent();
