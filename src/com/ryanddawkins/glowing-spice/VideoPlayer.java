@@ -106,7 +106,7 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer fastForward()
     {
-        this.skip(10*10000);
+        this.skip(10*1000);
         return this;
     }
 
@@ -117,7 +117,7 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer fastBackward()
     {
-        this.skip(-10*10000);
+        this.skip(-10*1000);
         return this;
     }
 
