@@ -61,7 +61,7 @@ public class VideoPlayer extends JFrame
     public VideoPlayer playFile(String path)
     {
     	this.mediaPlayerComponent.getMediaPlayer().playMedia(path);
-        this.mediaPlayerComponent.getMediaPlayer().setRate(1.0);
+        this.mediaPlayerComponent.getMediaPlayer().setRate((float)1.0);
     	this.playingFile = path;
     	return this;	
     }
@@ -74,7 +74,7 @@ public class VideoPlayer extends JFrame
     public VideoPlayer pause()
     {
         this.mediaPlayerComponent.getMediaPlayer().pause();
-        this.mediaPlayerComponent.getMediaPlayer().setRate(1.0);
+        this.mediaPlayerComponent.getMediaPlayer().setRate(1.0f);
         return this;
     }
 
@@ -108,7 +108,8 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer fastForward()
     {
-        this.skip(1.5);
+        float rate = 1.5f;
+        this.skip(rate);
         return this;
     }
 
@@ -119,7 +120,8 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer fastBackward()
     {
-        this.skip(-1.5);
+        float rate = -1.5f;
+        this.skip(rate);
         return this;
     }
 
