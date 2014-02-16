@@ -117,10 +117,14 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer fastBackward()
     {
-        this.skip(10.10000);
+        this.skip(-10*10000);
         return this;
     }
 
+    public String getVideoStatus()
+    {
+        return null;
+    }
 
     /**
      * Takes seconds integer and skips that many seconds per second

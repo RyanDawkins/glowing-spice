@@ -24,6 +24,7 @@ public class Command
 	public static final String PREVIOUS_CHAPTER = "PREVIOUS_CHAPTER";
 	public static final String SKIP_FORWARD = "SKIP_FORWARD";
 	public static final String SKIP_BACKWARD = "SKIP_BACKWARD";
+	public static final String NOW_PLAYING = "NOW_PLAYING";
 
 	private String command;
 	private JsonElement data;
@@ -138,21 +139,25 @@ public class Command
 		{
 			pauseMovie();
 		}
-		else if(this.command.eqauls(NEXT_CHAPTER))
+		else if(this.command.equals(NEXT_CHAPTER))
 		{
 			nextChapter();
 		}
-		else if(this.command.eqauls(PREVIOUS_CHAPTER))
+		else if(this.command.equals(PREVIOUS_CHAPTER))
 		{
 			previousChapter();
 		}
-		else if(this.command.eqauls(SKIP_BACKWARD))
+		else if(this.command.equals(SKIP_BACKWARD))
 		{
 			fastBackward();
 		}
-		else if(this.command.eqauls(SKIP_FORWARD))
+		else if(this.command.equals(SKIP_FORWARD))
 		{
-			fastFoward();
+			fastForward();
+		}
+		else if(this.command.equals(NOW_PLAYING))
+		{
+			nowPlaying();
 		}
 		else
 		{
@@ -249,9 +254,9 @@ public class Command
 	 *
 	 * @return void
 	 */
-	public void fastFoward()
+	public void fastForward()
 	{
-		this.player.fastFoward();
+		this.player.fastForward();
 	}
 
 	/**
@@ -262,6 +267,16 @@ public class Command
 	public void fastBackward()
 	{
 		this.player.fastBackward();
+	}
+
+	/**
+	 * Sends all now playing information to be returned
+	 *
+	 * @param void
+	 */
+	public void nowPlaying()
+	{
+
 	}
 
 	/**
