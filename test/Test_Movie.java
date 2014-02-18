@@ -17,7 +17,7 @@ public class Test_Movie extends Glowing_Assert
 
 	private static final String MOVIE_FILE_NAME = "movie.mks";
 	private static final String EXPECTED_MOVIE_NAME = "movie";
-	private static final String EXEPECTED_JSON = "{\"movie\":{\"name\":\"movie\",\"fileName\":\"movie.mks\"}}";
+	private static final String EXEPECTED_JSON = "{\"movie\":{\"name\":\"movie\",\"fileName\":\"movie.mks\",\"isDirectory\":\"false\"}}";
 
 	public static void main(String[] args)
 	{

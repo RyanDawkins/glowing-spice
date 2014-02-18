@@ -29,7 +29,7 @@ public class Test_Server extends Glowing_Assert
 			sentinel = false;
 		}
 
-		playMovie();
+		//playMovie();
 
 		if(sentinel)
 		{
