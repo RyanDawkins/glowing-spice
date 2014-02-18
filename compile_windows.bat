@@ -1,0 +1,7 @@
+echo "============="
+echo "Glowing-Spice"
+echo "============="
+echo "Compiling project..."
+javac src/com/ryanddawkins/glowing-spice/*.java -d bin -classpath "lib/gson-2.2.4.jar;lib/vlcj-2.4.1.jar;lib/jna-3.5.2.jar"
+javac test/*.java -d bin -classpath "bin;lib/gson-2.2.4.jar"
+echo "Finished!"
