@@ -68,38 +68,24 @@ public class ClientConnection implements Runnable
 		command.setPlayer(this.player);
 		command.run();
 		String response = command.getJsonReturn();
-		if(response != null)
+
+		PrintWriter writer;
+		try
 		{
-			PrintWriter writer;
-			try
+			writer = new PrintWriter(this.socket.getOutputStream());
+			if(response != null)
 			{
-				writer = new PrintWriter(this.socket.getOutputStream());
 				writer.println(response);
-				writer.println(Request.TERMINATOR);
-				writer.flush();
 			}
-			catch(IOException e)
-			{
-				System.out.println("Null socket sent");
-				e.printStackTrace();
-			}
+			writer.println(Request.TERMINATOR);
+			writer.flush();
 		}
-		else
+		catch(IOException e)
 		{
-			PrintWriter writer;
-			try
-			{
-				writer = new PrintWriter(this.socket.getOutputStream());
-				writer.println("--DONE--");
-				writer.flush();
-			}
-			catch(IOException e)
-			{
-				System.out.println("Null socket sent");
-				e.printStackTrace();
-			}	
-			System.out.println("Null response");
+			System.out.println("Null socket sent");
+			e.printStackTrace();
 		}
+
 		System.out.println("Ending client connection");
 	}
 
