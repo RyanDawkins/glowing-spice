@@ -48,6 +48,8 @@ public class ClientConnection implements Runnable
 	{
 
 		String jsonString = readJson();
+
+		// Parsing the jsonString sent to the server
 		Request request;
 		try
 		{
@@ -63,12 +65,15 @@ public class ClientConnection implements Runnable
 			e.printStackTrace();
 			return;
 		}
+
+		// Takes the command from the Request object and performs some action
 		String commandString = request.getCommand();
 		Command command = new Command(commandString, request.getJsonElement());
 		command.setPlayer(this.player);
 		command.run();
 		String response = command.getJsonReturn();
 
+		// Writes some correct response signified by the 
 		PrintWriter writer;
 		try
 		{
@@ -100,6 +105,7 @@ public class ClientConnection implements Runnable
 		String jsonString = "{}";
 		try
 		{
+			// This reads data into the stringbuilder until the terminator is sent
 			jsonBuilder = new StringBuilder();
 			String input = "";
 			BufferedReader reader = new BufferedReader(new InputStreamReader(this.socket.getInputStream()));
