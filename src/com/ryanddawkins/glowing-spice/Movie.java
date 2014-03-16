@@ -22,6 +22,10 @@ public class Movie extends MediaFile<Movie>
 	{
 		super(fileName);
 	}
+	public Movie(String fileName, boolean isPath)
+	{
+		super(fileName, isPath);
+	}
 
 	protected Movie getThis(){ return this; }
 

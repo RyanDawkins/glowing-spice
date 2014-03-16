@@ -5,7 +5,6 @@ import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import uk.co.caprica.vlcj.component.EmbeddedMediaPlayerComponent;
-import com.sun.jna.Native;
 
 /**
  * Movie player class to integrate with VLC player
@@ -18,7 +17,9 @@ import com.sun.jna.Native;
 public class VideoPlayer extends JFrame
 {
 
-	private String playingFile;
+	private Movie playingFile;
+    private boolean isPlaying;
+    private boolean isPaused;
     private final EmbeddedMediaPlayerComponent mediaPlayerComponent;
 
     /**
@@ -49,7 +50,31 @@ public class VideoPlayer extends JFrame
             }
         });
 
+        this.isPaused = true;
+        this.isPlaying = false;
+
 		this.setVisible(false);
+    }
+
+    public boolean isPaused()
+    {
+        return this.isPaused;
+    }
+
+    public VideoPlayer setPlayingFile(Movie playingFile)
+    {
+        this.playingFile = playingFile;
+        return this;
+    }
+
+    /**
+     * Returns the currently playing file.
+     *
+     * @return String playingFile
+     */
+    public Movie getPlayingFile()
+    {
+        return this.playingFile;
     }
 
     /**
@@ -60,10 +85,11 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer playFile(String path)
     {
+        this.isPlaying = true;
+        this.isPaused = false;
     	this.mediaPlayerComponent.getMediaPlayer().playMedia(path);
         this.mediaPlayerComponent.getMediaPlayer().setRate((float)1.0);
-    	this.playingFile = path;
-    	return this;	
+    	return this.setPlayingFile(new Movie(path, true));
     }
 
     /**
@@ -73,6 +99,7 @@ public class VideoPlayer extends JFrame
      */
     public VideoPlayer pause()
     {
+        this.isPaused = !this.isPaused;
         this.mediaPlayerComponent.getMediaPlayer().pause();
         this.mediaPlayerComponent.getMediaPlayer().setRate(1.0f);
         return this;
@@ -125,9 +152,9 @@ public class VideoPlayer extends JFrame
         return this;
     }
 
-    public String getVideoStatus()
+    public boolean isPlaying()
     {
-        return null;
+        return this.isPlaying;
     }
 
     /**
