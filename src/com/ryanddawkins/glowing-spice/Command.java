@@ -276,7 +276,15 @@ public class Command
 	 */
 	public void nowPlaying()
 	{
-
+		NowPlaying nowPlaying;
+		Movie playingFile;
+		if(this.player != null && (playingFile = this.player.getPlayingFile()) != null){
+			nowPlaying = new NowPlaying(playingFile.getName());
+			nowPlaying.setPlayer(this.player);
+		} else {
+			nowPlaying = new NowPlaying("");
+		}
+		this.jsonReturn = nowPlaying.toJSON();
 	}
 
 	/**

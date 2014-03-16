@@ -1,5 +1,8 @@
 package com.ryanddawkins.glowing_spice;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 /**
  * Class to hold a media file
  *
@@ -28,6 +31,23 @@ public abstract class MediaFile <T extends MediaFile<T>>
 	 */
 	public MediaFile(String fileName)
 	{
+		this(fileName, false);
+	}
+
+	public MediaFile(String filePath, boolean isPath)
+	{
+		String fileName;
+		if(isPath)
+		{
+			fileName = Paths.get(filePath).getFileName().toString();
+			this.setFilePath(filePath);
+		}
+		else
+		{
+			fileName = filePath;
+		}
+
+		this.setFileName(fileName);
 		// Removes file extension
 		if(fileName.lastIndexOf('.') > -1)
 		{
@@ -125,4 +145,10 @@ public abstract class MediaFile <T extends MediaFile<T>>
 	{
 		return this.fileName;
 	}
+
+	public String toString()
+	{
+		return this.name;
+	}
+
 }
